@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 
 use dioxus::prelude::*;
-use tracing::{info, Level};
+use tracing::*;
 
 #[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 enum Route {
@@ -13,8 +13,8 @@ enum Route {
 }
 
 fn main() {
-    // Init logger
-    dioxus_logger::init(Level::INFO).expect("failed to init logger");
+    dioxus_logger::init(Level::DEBUG).expect("failed to init logger");
+    info!("starting");
     launch(App);
 }
 
@@ -31,10 +31,32 @@ fn Today() -> Element {
 
 #[component]
 fn Now() -> Element {
+    let mut text = use_signal(|| String::from("..."));
+
+    info!("now");
     rsx! {
 
         sl-badge {
+            onclick: move |_| async move {
+                if let Ok(data) = get_server_data().await {
+                    tracing::info!("Client received: {}", data);
+                    text.set(data.clone());
+                    post_server_data(data).await.unwrap();
+                }
+            },
             "Hello",
         }
+
     }
+}
+
+#[server(PostServerData)]
+async fn post_server_data(data: String) -> Result<(), ServerFnError> {
+    info!("Server received: {}", data);
+    Ok(())
+}
+
+#[server(GetServerData)]
+async fn get_server_data() -> Result<String, ServerFnError> {
+    Ok("Hello from a badge!".to_string())
 }
