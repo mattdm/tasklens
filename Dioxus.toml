@@ -1,7 +1,7 @@
 [application]
 
 # App (Project) Name
-name = "tasklens"
+name = "Tasklens"
 
 # Dioxus App Default Platform
 # desktop, web
@@ -30,11 +30,10 @@ watch_path = ["src", "assets"]
 [web.resource]
 
 # CSS style file
-
-style = []
+style = ["shoelace.css"]
 
 # Javascript code file
-script = []
+script = ["shoelace.js"]
 
 [web.resource.dev]
 
