@@ -38,7 +38,16 @@ fn Page() -> Element {
 #[component]
 fn Header() -> Element {
     rsx! {
-        header {}
+        header {
+            AddTaskButton {}
+        }
+    }
+}
+
+#[component]
+fn AddTaskButton() -> Element {
+    rsx! {
+        sl-badge { "hey "}
     }
 }
 
