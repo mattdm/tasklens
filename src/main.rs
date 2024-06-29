@@ -25,11 +25,6 @@ fn App() -> Element {
 }
 
 #[component]
-fn Today() -> Element {
-    todo!("One page at a time...")
-}
-
-#[component]
 fn Now() -> Element {
     let mut text = use_signal(|| String::from("..."));
 
@@ -48,6 +43,11 @@ fn Now() -> Element {
         }
 
     }
+}
+
+#[component]
+fn Today() -> Element {
+    todo!("One page at a time...")
 }
 
 #[server(PostServerData)]
