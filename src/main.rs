@@ -5,13 +5,12 @@ use tracing::*;
 
 #[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 enum Route {
-
     #[layout(Page)]
-        #[route("/now")]
-        #[redirect("/:.._segments", |_segments: Vec<String>| Route::Now {})]
-        Now {},
-        #[route("/today")]
-        Today {},
+    #[route("/now")]
+    #[redirect("/:.._segments", |_segments: Vec<String>| Route::Now {})]
+    Now {},
+    #[route("/today")]
+    Today {},
 }
 
 fn main() {
@@ -47,7 +46,7 @@ fn Header() -> Element {
 #[component]
 fn AddTaskButton() -> Element {
     rsx! {
-        sl-badge { "hey "}
+        sl-button { "hey "}
     }
 }
 
@@ -57,7 +56,6 @@ fn Footer() -> Element {
         footer {}
     }
 }
-
 
 #[component]
 fn Now() -> Element {
