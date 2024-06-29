@@ -5,11 +5,13 @@ use tracing::*;
 
 #[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 enum Route {
-    #[route("/now")]
-    #[redirect("/:.._segments", |_segments: Vec<String>| Route::Now {})]
-    Now {},
-    #[route("/today")]
-    Today {},
+
+    #[layout(Page)]
+        #[route("/now")]
+        #[redirect("/:.._segments", |_segments: Vec<String>| Route::Now {})]
+        Now {},
+        #[route("/today")]
+        Today {},
 }
 
 fn main() {
@@ -23,6 +25,30 @@ fn App() -> Element {
         Router::<Route> {}
     }
 }
+
+#[component]
+fn Page() -> Element {
+    rsx! {
+        Header {}
+        Outlet::<Route> {}
+        Footer {}
+    }
+}
+
+#[component]
+fn Header() -> Element {
+    rsx! {
+        header {}
+    }
+}
+
+#[component]
+fn Footer() -> Element {
+    rsx! {
+        footer {}
+    }
+}
+
 
 #[component]
 fn Now() -> Element {
