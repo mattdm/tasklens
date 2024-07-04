@@ -52,7 +52,7 @@ fn Header() -> Element {
 #[component]
 fn AddTaskButton() -> Element {
     rsx! {
-        sl-button { "hey "}
+        button { "hey "}
     }
 }
 
@@ -70,7 +70,7 @@ fn Now() -> Element {
     info!("now");
     rsx! {
 
-        sl-badge {
+        div {
             onclick: move |_| async move {
                 if let Ok(data) = get_server_data().await {
                     tracing::info!("Client received: {}", data);
