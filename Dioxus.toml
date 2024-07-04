@@ -5,7 +5,7 @@ name = "Tasklens"
 
 # Dioxus App Default Platform
 # desktop, web
-default_platform = "web"
+default_platform = "fullstack"
 
 # `build` & `serve` dist path
 out_dir = "dist"
@@ -30,7 +30,7 @@ watch_path = ["src", "assets"]
 [web.resource]
 
 # CSS style file
-style = ["shoelace.css","main.css"]
+style = ["shoelace.css", "main.css"]
 
 # Javascript code file
 script = ["shoelace.js"]

@@ -15,8 +15,14 @@ enum Route {
 
 fn main() {
     dioxus_logger::init(Level::DEBUG).expect("Failed to initialize logger.");
+
+    // Run the server on something other than the default 8080
+    let cfg = server_only!(
+        dioxus::fullstack::Config::new().addr(std::net::SocketAddr::from(([0, 0, 0, 0], 8074)))
+    );
+
     info!("starting");
-    launch(App);
+    LaunchBuilder::fullstack().with_cfg(cfg).launch(App)
 }
 
 fn App() -> Element {
