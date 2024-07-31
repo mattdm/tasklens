@@ -5,7 +5,7 @@ use tracing::*;
 
 #[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 enum Route {
-    #[layout(Page)]
+    #[layout(Main)]
     #[route("/now")]
     #[redirect("/:.._segments", |_segments: Vec<String>| Route::Now {})]
     Now {},
@@ -32,10 +32,13 @@ fn App() -> Element {
 }
 
 #[component]
-fn Page() -> Element {
+fn Main() -> Element {
     rsx! {
         Header {}
-        Outlet::<Route> {}
+        div {
+            class: "page",
+            Outlet::<Route> {}
+        }
         Footer {}
     }
 }
@@ -44,7 +47,9 @@ fn Page() -> Element {
 fn Header() -> Element {
     rsx! {
         header {
-            AddTaskButton {}
+            AddTaskButton {},
+            PageSelector {},
+            MenuButton {},
         }
     }
 }
@@ -52,7 +57,24 @@ fn Header() -> Element {
 #[component]
 fn AddTaskButton() -> Element {
     rsx! {
-        button { "hey "}
+        button { class: "button-icon",
+                 "➕"}
+    }
+}
+
+#[component]
+fn PageSelector() -> Element {
+    rsx! {
+        button { class: "selector-page",
+                 "Past | Present | Future"}
+    }
+}
+
+#[component]
+fn MenuButton() -> Element {
+    rsx! {
+        button { class: "button-icon",
+                 "☰"}
     }
 }
 
