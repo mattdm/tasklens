@@ -8,37 +8,34 @@ body {
     padding: 0px;
 }
 
-header {
+header,
+footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: var(--ui-square);
-    flex: 1 none auto;
+    flex: none none auto;
     background-color: var(--color-accent);
 }
 
-div #main {
-    height: 100%;
+
+footer {
+    height: calc(var(--ui-square) * 1.5);
+}
+
+#main {
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 div.page {
     height: 100%;
-    flex: 1;
     display: flex;
     flex-wrap: wrap;
 }
 
-footer {
-    display: flex;
-    width: 100%;
-    height: calc(var(--ui-square) * 1.5);
-    flex: none none auto;
-    background-color: var(--color-accent);
-}
-
 .button-icon {
     width: var(--ui-square);
+    height: var(--ui-square);
     flex: none none auto;
 }
