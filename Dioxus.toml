@@ -30,10 +30,10 @@ watch_path = ["src", "assets"]
 [web.resource]
 
 # CSS style file
-style = ["shoelace.css", "main.css"]
+style = ["main.css"]
 
 # Javascript code file
-script = ["shoelace.js"]
+script = []
 
 [web.resource.dev]
 
