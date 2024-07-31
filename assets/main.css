@@ -1,12 +1,26 @@
-:root {
-    --color-accent: #51a2da;
-    --ui-square: 40px
+@font-face {
+    font-family: "Aleo";
+    font-style: normal;
+    src: url("./fonts/AleoVariableGX.ttf");
+}
+
+@font-face {
+    font-family: "Aleo";
+    font-style: italic;
+    src: url("./fonts/AleoVariableItalicGX.ttf");
 }
 
 body {
+    font-family: "Aleo" !important;
     margin: 0px;
     padding: 0px;
 }
+
+:root {
+    --color-accent: #51a2da;
+    --ui-square: 3rem;
+}
+
 
 header,
 footer {
@@ -17,10 +31,6 @@ footer {
     background-color: var(--color-accent);
 }
 
-
-footer {
-    height: calc(var(--ui-square) * 1.5);
-}
 
 #main {
     height: 100vh;
@@ -34,8 +44,52 @@ div.page {
     flex-wrap: wrap;
 }
 
-.button-icon {
+.iconbutton {
     width: var(--ui-square);
     height: var(--ui-square);
     flex: none none auto;
+}
+
+.contextcontainer {
+    height: var(--ui-square);
+    display: flex;
+    justify-content: start;
+    flex-grow: 1;
+}
+
+.searchcontainer {
+    height: var(--ui-square);
+    display: flex;
+    flex-grow: 4;
+}
+
+.label {
+    margin: auto 0 auto 0.5rem;
+    background-clip: padding-box;
+    border-radius: 20px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: large;
+    padding: 0.3em 0.5em;
+    border: 0.15rem solid #ffffff;
+}
+
+.searchbox {
+    margin: auto auto auto 0;
+    font-size: large;
+    width: 100%;
+    padding: 0.3em 0.5em;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.pageselector {
+    font-size: large;
+}
+
+.taskcard {
+    width: 50em;
+    height: 30ex;
+    margin: 2rem;
+    border: 0.2rem solid black;
 }

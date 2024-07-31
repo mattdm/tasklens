@@ -47,6 +47,16 @@ fn Main() -> Element {
 fn Header() -> Element {
     rsx! {
         header {
+            ContextSelector {},
+            SearchBox {},
+        }
+    }
+}
+
+#[component]
+fn Footer() -> Element {
+    rsx! {
+        footer {
             AddTaskButton {},
             PageSelector {},
             MenuButton {},
@@ -57,7 +67,7 @@ fn Header() -> Element {
 #[component]
 fn AddTaskButton() -> Element {
     rsx! {
-        button { class: "button-icon",
+        button { class: "iconbutton",
                  "➕"}
     }
 }
@@ -65,7 +75,7 @@ fn AddTaskButton() -> Element {
 #[component]
 fn PageSelector() -> Element {
     rsx! {
-        button { class: "selector-page",
+        button { class: "pageselector",
                  "Past | Present | Future"}
     }
 }
@@ -73,42 +83,61 @@ fn PageSelector() -> Element {
 #[component]
 fn MenuButton() -> Element {
     rsx! {
-        button { class: "button-icon",
+        button { class: "iconbutton",
                  "☰"}
     }
 }
 
 #[component]
-fn Footer() -> Element {
+fn ContextSelector() -> Element {
+    let task_context = use_signal(|| "Context".to_string());
+    // TODO: make this a list of labels and loop through them....
+    // TODO: click on contextcontainer to bring up context selector
+
     rsx! {
-        footer {}
+        div { class: "contextcontainer",
+              span { class: "label",
+                   "{task_context}",
+              }
+              span { class: "label",
+                   "other",
+              }
+            }
+    }
+}
+
+#[component]
+fn SearchBox() -> Element {
+    rsx! {
+        div { class: "searchcontainer",
+              input { class: "searchbox",
+                      placeholder: "search..." }
+        }
     }
 }
 
 #[component]
 fn Now() -> Element {
-    let mut text = use_signal(|| String::from("..."));
-
-    info!("now");
+    print!("um");
     rsx! {
-
-        div {
-            onclick: move |_| async move {
-                if let Ok(data) = get_server_data().await {
-                    tracing::info!("Client received: {}", data);
-                    text.set(data.clone());
-                    post_server_data(data).await.unwrap();
-                }
-            },
-            "Hello",
-        }
-
+        TaskCard {}
+        TaskCard {}
+        TaskCard {}
     }
 }
 
 #[component]
 fn Today() -> Element {
     todo!("One page at a time...")
+}
+
+#[component]
+fn TaskCard() -> Element {
+    rsx! {
+        div { class: "taskcard", "one" }
+        div { class: "taskcard", "two" }
+        div { class: "taskcard", "three" }
+    }
 }
 
 #[server(PostServerData)]
