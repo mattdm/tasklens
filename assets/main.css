@@ -29,23 +29,33 @@ footer {
     width: 100%;
     flex: none none auto;
     background-color: var(--color-accent);
+    flex-shrink: 1;
 }
-
 
 #main {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: clip;
+}
+
+div.pageholder {
+    display: inline-block;
+    overflow: auto;
+    height: 100vh;
+
 }
 
 div.page {
-    height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: flex-start;
     padding: 1rem;
     gap: 1rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+    overflow: scroll;
 }
 
 .iconbutton {

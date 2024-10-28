@@ -35,11 +35,14 @@ fn App() -> Element {
 fn Main() -> Element {
     rsx! {
         Header {}
-        div {
-            class: "page",
-            Outlet::<Route> {}
+        div { class: "pageholder",
+            div {
+                class: "page",
+                Outlet::<Route> {}
+            }
         }
         Footer {}
+
     }
 }
 
@@ -75,8 +78,9 @@ fn AddTaskButton() -> Element {
 #[component]
 fn PageSelector() -> Element {
     rsx! {
-        button { class: "pageselector",
-                 "Past | Present | Future"}
+        div { class: "era-label",
+            button { class: "pageselector" , "Past | Present | Future"}
+        }
     }
 }
 
