@@ -42,6 +42,10 @@ div.page {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    padding: 1rem;
+    gap: 1rem;
 }
 
 .iconbutton {
@@ -90,6 +94,6 @@ div.page {
 .taskcard {
     width: 50em;
     height: 30ex;
-    margin: 2rem;
+    margin: 0;
     border: 0.2rem solid black;
 }

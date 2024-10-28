@@ -134,9 +134,7 @@ fn Today() -> Element {
 #[component]
 fn TaskCard() -> Element {
     rsx! {
-        div { class: "taskcard", "one" }
-        div { class: "taskcard", "two" }
-        div { class: "taskcard", "three" }
+        div { class: "taskcard", "Task Card" }
     }
 }
 
