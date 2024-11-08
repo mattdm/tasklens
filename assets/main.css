@@ -98,6 +98,12 @@ div.page {
 }
 
 .pageselector {
+    height: 100%;
+
+
+}
+
+.pagebutton {
     font-size: large;
 }
 
@@ -106,4 +112,8 @@ div.page {
     height: 30ex;
     margin: 0;
     border: 0.2rem solid black;
+}
+
+.erasection {
+    display: grid;
 }

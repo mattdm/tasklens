@@ -78,9 +78,32 @@ fn AddTaskButton() -> Element {
 #[component]
 fn PageSelector() -> Element {
     rsx! {
-        div { class: "era-label",
-            button { class: "pageselector" , "Past | Present | Future"}
-        }
+        div { class: "pageselector"}
+            div { class: "erasection",
+                //"Future",
+                button { class: "pagebutton" , "Ideas"},
+                button { class: "pagebutton" , "Backlog"},
+                button { class: "pagebutton" , "Ready"},
+            }
+            div { class: "erasection",
+                //"Present",
+                button { class: "pagebutton" , "This Week"},
+                PageButton { },
+                Link { to: Route::Now {}, button { class: "pagebutton" , "Now"} },
+            }
+            div { class: "erasection",
+                //"Past",
+                button { class: "pagebutton" , "Done"},
+                button { class: "pagebutton" , "Archive"},
+                button { class: "pagebutton" , "Report"},
+            }
+
+    }
+}
+
+fn PageButton() -> Element {
+    rsx! {
+        Link { to: Route::Today {}, button { class: "pagebutton" , "Today"} },
     }
 }
 
@@ -132,7 +155,9 @@ fn Now() -> Element {
 
 #[component]
 fn Today() -> Element {
-    todo!("One page at a time...")
+    rsx! {
+        div { class: "taskcard", "Today's Cards" }
+    }
 }
 
 #[component]
