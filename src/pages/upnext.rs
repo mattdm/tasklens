@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 //use crate::cards::*;
 
 #[component]
-pub fn OnDeck() -> Element {
+pub fn UpNext() -> Element {
     rsx! {
         "TK: items picked for this week / today"
     }

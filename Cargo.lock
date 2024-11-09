@@ -2638,6 +2638,7 @@ dependencies = [
 name = "tasklens"
 version = "0.1.0"
 dependencies = [
+ "convert_case",
  "dioxus",
  "dioxus-logger",
  "manganis",

@@ -13,8 +13,8 @@ pub enum Route {
     Ideas {},
     #[route("/backlog")]
     Backlog {},
-    #[route("/ondeck")]
-    OnDeck {},
+    #[route("/upnext")]
+    UpNext {},
     #[route("/done")]
     Done {},
     #[route("/archive")]

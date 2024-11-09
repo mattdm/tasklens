@@ -13,6 +13,7 @@ dioxus = { version = "0.5", features = ["fullstack", "router"] }
 dioxus-logger = "0.5.0"
 manganis = "0.2.2"
 tracing = "0.1.40"
+convert_case = "0.6.0"
 
 [features]
 default = []
