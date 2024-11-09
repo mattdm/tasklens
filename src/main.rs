@@ -3,6 +3,10 @@
 use dioxus::prelude::*;
 use tracing::*;
 
+mod cards;
+mod pages;
+use pages::*;
+
 #[derive(Clone, Routable, Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 enum Route {
     #[layout(Main)]
@@ -140,30 +144,6 @@ fn SearchBox() -> Element {
               input { class: "searchbox",
                       placeholder: "search..." }
         }
-    }
-}
-
-#[component]
-fn Now() -> Element {
-    print!("um");
-    rsx! {
-        TaskCard {}
-        TaskCard {}
-        TaskCard {}
-    }
-}
-
-#[component]
-fn Today() -> Element {
-    rsx! {
-        div { class: "taskcard", "Today's Cards" }
-    }
-}
-
-#[component]
-fn TaskCard() -> Element {
-    rsx! {
-        div { class: "taskcard", "Task Card" }
     }
 }
 
