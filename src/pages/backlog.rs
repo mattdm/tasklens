@@ -4,8 +4,8 @@ use dioxus::prelude::*;
 //use crate::cards::*;
 
 #[component]
-pub fn Today() -> Element {
+pub fn Backlog() -> Element {
     rsx! {
-        "TK: list of items picked for today"
+        "TK: backlog / ready"
     }
 }

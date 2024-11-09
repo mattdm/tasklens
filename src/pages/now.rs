@@ -5,7 +5,6 @@ use crate::cards::*;
 
 #[component]
 pub fn Now() -> Element {
-    print!("um");
     rsx! {
         TaskCard {}
         TaskCard {}

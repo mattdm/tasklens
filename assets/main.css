@@ -84,6 +84,7 @@ div.page {
     background-color: #333333;
     color: #ffffff;
     font-size: large;
+    text-wrap: nowrap;
     padding: 0.3em 0.5em;
     border: 0.15rem solid #ffffff;
 }
@@ -99,12 +100,25 @@ div.page {
 
 .pageselector {
     height: 100%;
-
-
+    display: flexbox;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .pagebutton {
     font-size: large;
+    text-wrap: nowrap;
+    background-clip: padding-box;
+    background-color: #666666;
+    color: #ffffff;
+    font-size: large;
+    margin: 0.15rem 0.15rem;
+    padding: 0.3rem 0.5rem 0.3rem;
+}
+
+.currentbutton {
+    border-style: inset !important;
+    padding: 0.3rem 0.5rem 0.6rem;
 }
 
 .taskcard {
@@ -112,8 +126,4 @@ div.page {
     height: 30ex;
     margin: 0;
     border: 0.2rem solid black;
-}
-
-.erasection {
-    display: grid;
 }
