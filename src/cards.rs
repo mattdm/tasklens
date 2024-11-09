@@ -3,16 +3,39 @@ use dioxus::prelude::*;
 
 #[component]
 pub fn TaskCard() -> Element {
+    let mut title = use_signal(|| "Title TK".to_string());
+    let mut detail = use_signal(|| "Detail TK".to_string());
     let mut edittitle = use_signal(|| false);
-    let mut edittext = use_signal(|| false);
+    let mut editdetail = use_signal(|| false);
 
     use_effect(move || println!("edittitle changed to {edittitle:?}"));
-    use_effect(move || println!("edittext changed to {edittext:?}"));
+    use_effect(move || println!("edittext changed to {editdetail:?}"));
 
     rsx! {
             section { class: "taskcard",
-                h1 { onclick: move |_| edittitle.set(true), contenteditable: if edittitle() { "true" }, "Title TK" },
-                p { onclick: move |_| edittext.set(true), contenteditable: if edittext() { "true" }, "Task text TK" },
+                if edittitle() {
+                    input { onmounted: move |e| async move { _ = e.set_focus(true).await },
+                            oninput: move |e| title.set(e.value()),
+                            onblur: move |_| edittitle.set(false),
+                            value: "{title}"
+                        }
+                } else {
+                    h1 { ondoubleclick: move |_| edittitle.set(true),
+                        "{title}"
+                    }
+                },
+                if editdetail() {
+                    textarea {onmounted: move |e| async move { _ = e.set_focus(true).await },
+                        oninput: move |e| detail.set(e.value()),
+                        onblur: move |_| editdetail.set(false),
+                        "{detail}"
+                    }
+                }
+                else {
+                    p { ondoubleclick: move |_| editdetail.set(true),
+                       "{detail}"
+                    }
+                },
 
         }
     }

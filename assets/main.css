@@ -131,14 +131,14 @@ div.page {
     box-shadow: 0.25rem 0.5rem 0.5rem #666666;
 }
 
-.taskcard h1 {
+.taskcard h1 input {
     padding: 0.1rem;
     margin: 0.5rem 0.4rem 0;
     font-size: large;
 
 }
 
-.taskcard p {
+.taskcard p textarea {
     padding: 0.1rem;
     margin: 0.4rem;
 
