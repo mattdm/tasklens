@@ -122,8 +122,29 @@ div.page {
 }
 
 .taskcard {
-    width: 50em;
-    height: 30ex;
-    margin: 0;
-    border: 0.2rem solid black;
+    width: 25rem;
+    height: auto;
+    margin: 0 0;
+    padding: 0 0.5rem;
+    border-radius: 20px;
+    border: 0.1rem solid #333333;
+    box-shadow: 0.25rem 0.5rem 0.5rem #666666;
+}
+
+.taskcard h1 {
+    padding: 0.1rem;
+    margin: 0.5rem 0.4rem 0;
+    font-size: large;
+
+}
+
+.taskcard p {
+    padding: 0.1rem;
+    margin: 0.4rem;
+
+
+}
+
+[contenteditable] {
+    border: inset;
 }
