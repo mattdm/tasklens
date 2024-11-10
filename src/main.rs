@@ -4,7 +4,7 @@ use tracing::*;
 
 mod task;
 
-mod cards;
+mod card;
 mod layouts;
 mod pages;
 mod route;

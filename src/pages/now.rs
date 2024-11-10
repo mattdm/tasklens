@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
 
-use crate::cards::TaskCard;
+use crate::card::TaskCard;
 
 #[component]
 pub fn Now() -> Element {
