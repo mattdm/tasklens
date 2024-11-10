@@ -19,6 +19,7 @@ Like, really basic, because there's not even an app here yet.
 - [ ] manually populate this week from up next
 - [ ] manually populate today from this week
 - [ ] "defer" button (initially, kicks card back)
+- [ ] conceptual choice: pass around card ids or whole card structs?
 
 Future
 ------
