@@ -51,7 +51,7 @@ fn ContextSelector() -> Element {
                    "{task_context}",
               }
               span { class: "label",
-                   "other",
+                   "#tags",
               }
             }
     }

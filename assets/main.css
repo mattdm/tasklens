@@ -75,7 +75,8 @@ div.page {
     margin: auto 0 auto 0.5rem;
     background-clip: padding-box;
     border-radius: 20px;
-    background-color: #333333;
+    /* background-color: #333333; */
+    background-color: transparent;
     color: #ffffff;
     font-size: large;
     text-wrap: nowrap;
@@ -93,35 +94,42 @@ div.page {
 }
 
 .pageselector {
-    position: relative;
     height: var(--ui-square);
     justify-content: center;
     flex-wrap: nowrap;
-
 }
 
-#ideas.pageselector {
-    left: calc(var(--select-button) * 2.5);
+#ideasbutton.pageselector {
+    /* left: calc(var(--select-button) * 2.5); */
+    transform: translateX(calc(var(--select-button) * 2.5));
+    transition: 0.5s;
 }
 
-#backlog.pageselector {
-    left: calc(var(--select-button) * 1.5);
+#backlogbutton.pageselector {
+    /* left: calc(var(--select-button) * 1.5); */
+    transform: translateX(calc(var(--select-button) * 1.5));
+    transition: 0.5s;
 }
 
-#upnext.pageselector {
-    left: calc(var(--select-button) / 2);
+#upnextbutton.pageselector {
+    /* left: calc(var(--select-button) / 2); */
+    transform: translateX(calc(var(--select-button) * 0.5));
+    transition: 0.5s;
 }
 
-#now.pageselector {
-    right: calc(var(--select-button) / 2);
+#nowbutton.pageselector {
+    transform: translateX(calc(var(--select-button) * -0.5));
+    transition: 0.5s;
 }
 
-#done.pageselector {
-    right: calc(var(--select-button) * 1.5);
+#donebutton.pageselector {
+    transform: translateX(calc(var(--select-button) * -1.5));
+    transition: 0.5s;
 }
 
-#archive.pageselector {
-    right: calc(var(--select-button) * 2.5);
+#archivebutton.pageselector {
+    transform: translateX(calc(var(--select-button) * -2.5));
+    transition: 0.5s;
 }
 
 .pagebutton {
@@ -147,8 +155,7 @@ div.page {
 
 .currentbutton {
     width: calc(var(--select-button) * 1.4);
-    bottom: 1rem;
-    background-color: black;
+    /* background-color: black; */
     border-top-left-radius: calc(var(--select-button) / 4);
     border-top-right-radius: calc(var(--select-button) / 4);
     border-width: 3px;

@@ -23,9 +23,11 @@ pub use self::upnext::UpNext;
 #[component]
 pub fn PageSelector() -> Element {
     let path: Route = use_route();
+
+    // TODO: alternate for small screens
     rsx! {
         div { class: "pageselector",
-              id: { format!("{path}").substring(1,10)},
+              id: format!("{path}button").substring(1,20),
             for link in [Route::Ideas{},Route::Backlog{},Route::UpNext{},Route::Now{},Route::Done{},Route::Archive{}].iter() {
                 Link { to: link.clone(), button { class: "pagebutton", class: if &path == link {"currentbutton"}, { format!("{link:?}").to_case(Case::Title) } } }
             }
