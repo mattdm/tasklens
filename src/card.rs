@@ -1,42 +1,44 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
 
+use crate::task;
+
 #[component]
 pub fn TaskCard(task_id: i32) -> Element {
-    let mut title = use_signal(|| format!("Task {task_id}"));
-    let mut detail = use_signal(|| "Detail TK".to_string());
-    let mut edittitle = use_signal(|| false);
-    let mut editdetail = use_signal(|| false);
+    // TODO: convert to  `let mut title = use_signal(|| task::load(task_id));
 
-    use_effect(move || println!("edittitle changed to {edittitle:?}"));
-    use_effect(move || println!("edittext changed to {editdetail:?}"));
+    let mut task = task::load(task_id);
+
+    let mut title = use_signal(|| task.title);
+    let mut detail = use_signal(|| task.details);
+    let mut editing = use_signal(|| false);
+
+    // fn update_text(e: Event<FormData>) {
+    //     detail.set(e.value());
+    // }
 
     rsx! {
-            section { class: "taskcard",
-                draggable: "true",
-                if edittitle() {
-                    input { onmounted: move |e| async move { _ = e.set_focus(true).await },
-                            oninput: move |e| title.set(e.value()),
-                            onblur: move |_| edittitle.set(false),
-                            value: "{title}"
-                        }
-                } else {
-                    h1 { ondoubleclick: move |_| edittitle.set(true),
-                        "{title}"
-                    }
-                },
-                if editdetail() {
-                    textarea {onmounted: move |e| async move { _ = e.set_focus(true).await },
-                        oninput: move |e| detail.set(e.value()),
-                        onblur: move |_| editdetail.set(false),
-                        "{detail}"
-                    }
+        section { ondoubleclick: move |_| editing.set(true),
+            class: "taskcard",
+            draggable: "true",
+
+            h1 { ondoubleclick: move |_| editing.set(true),
+                "{title}"
+            },
+
+            if editing() {
+                textarea {
+                    onmounted: move |e| async move { _ = e.set_focus(true).await },
+                    oninput: move |e| { detail.set(e.value()) },
+                    onblur: move |_| editing.set(false),
+                    rows: 20,
+                    "# {title}\n{detail}"
                 }
-                else {
-                    p { ondoubleclick: move |_| editdetail.set(true),
-                       "{detail}"
-                    }
-                },
+            },
+
+            p { ondoubleclick: move |_| editing.set(true),
+                "{detail}"
+            }
 
         }
     }

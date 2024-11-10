@@ -212,6 +212,29 @@ div.page {
     line-height: 2ex;
 }
 
-[contenteditable] {
-    border: inset;
+.taskcard textarea {
+    width: 100%;
+    margin: 0.5rem 0.5rem 0.5rem 0rem;
+    font-family: "Aleo";
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    background-color: white;
+    font-size: 16px;
+    resize: none;
 }
+
+textarea:focus {
+    border-radius: 5px;
+    border: 3px solid var(--color-accent);
+    outline: none;
+}
+
+input:focus {
+    border-radius: 5px;
+    border: 3px solid var(--color-accent);
+    outline: none;
+}
+
+/* [contenteditable] {
+    border: 3px solid var(--color-accent)
+} */

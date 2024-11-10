@@ -2,7 +2,6 @@
 use dioxus::prelude::*;
 
 use convert_case::{Case, Casing};
-use substring::Substring;
 
 mod archive;
 mod backlog;
@@ -27,7 +26,7 @@ pub fn PageSelector() -> Element {
     // TODO: alternate for small screens
     rsx! {
         div { class: "pageselector",
-              id: format!("{path}button").substring(1,20),
+              id: format!("{path}button").get(1..),
             for link in [Route::Ideas{},Route::Backlog{},Route::UpNext{},Route::Now{},Route::Done{},Route::Archive{}].iter() {
                 Link { to: link.clone(), button { class: "pagebutton", class: if &path == link {"currentbutton"}, { format!("{link:?}").to_case(Case::Title) } } }
             }
