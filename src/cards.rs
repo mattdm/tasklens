@@ -2,8 +2,8 @@
 use dioxus::prelude::*;
 
 #[component]
-pub fn TaskCard() -> Element {
-    let mut title = use_signal(|| "Title TK".to_string());
+pub fn TaskCard(task_id: i32) -> Element {
+    let mut title = use_signal(|| format!("Task {task_id}"));
     let mut detail = use_signal(|| "Detail TK".to_string());
     let mut edittitle = use_signal(|| false);
     let mut editdetail = use_signal(|| false);

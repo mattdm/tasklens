@@ -2,9 +2,14 @@
 use dioxus::prelude::*;
 
 #[derive(PartialEq, Props, Clone)]
-struct Task {
+pub struct TaskId {
+    pub task_id: Option<i32>,
+}
+
+#[derive(PartialEq, Clone)]
+pub struct Task {
+    task_id: i32,
     title: String,
     details: String,
-    order: i32,
     // TODO: urgency, importance, size, enjoyability, due date, computed priority
 }
