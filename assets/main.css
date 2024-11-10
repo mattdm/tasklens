@@ -19,6 +19,7 @@ body {
 :root {
     --color-accent: #51a2da;
     --ui-square: 3rem;
+    --select-button: 5.5rem;
 }
 
 
@@ -92,27 +93,67 @@ div.page {
 }
 
 .pageselector {
-    height: 100%;
-    display: flexbox;
+    position: relative;
+    height: var(--ui-square);
     justify-content: center;
-    align-items: flex-start;
+    flex-wrap: nowrap;
+
+}
+
+#ideas.pageselector {
+    left: calc(var(--select-button) * 2.5);
+}
+
+#backlog.pageselector {
+    left: calc(var(--select-button) * 1.5);
+}
+
+#upnext.pageselector {
+    left: calc(var(--select-button) / 2);
+}
+
+#now.pageselector {
+    right: calc(var(--select-button) / 2);
+}
+
+#done.pageselector {
+    right: calc(var(--select-button) * 1.5);
+}
+
+#archive.pageselector {
+    right: calc(var(--select-button) * 2.5);
 }
 
 .pagebutton {
+    height: var(--ui-square);
+    width: var(--select-button);
+    font-family: "Aleo";
     font-size: large;
     text-wrap: nowrap;
+    overflow: clip;
     background-clip: padding-box;
     border-radius: 5px;
-    font-size: large;
-    font-family: "Aleo";
-    margin: 0.15rem 0.15rem;
+    margin: 0;
     padding: 0.3rem 0.5rem 0.3rem;
+    background-color: transparent;
+    color: #ffffff;
+    border-style: none;
+}
+
+.pagebutton:hover {
+    text-shadow: #ffffff;
+    font-weight: bolder;
 }
 
 .currentbutton {
-    border-style: inset;
-    padding: 0.3rem 0.5rem 0.6rem;
-    font-weight: bold;
+    width: calc(var(--select-button) * 1.4);
+    bottom: 1rem;
+    background-color: black;
+    border-top-left-radius: calc(var(--select-button) / 4);
+    border-top-right-radius: calc(var(--select-button) / 4);
+    border-width: 3px;
+    font-weight: bolder;
+    font-size: x-large;
 }
 
 .taskcolumn {
