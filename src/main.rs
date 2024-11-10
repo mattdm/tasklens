@@ -2,6 +2,8 @@
 use dioxus::prelude::*;
 use tracing::*;
 
+mod task;
+
 mod cards;
 mod layouts;
 mod pages;
