@@ -13,6 +13,7 @@ pub fn TaskCard() -> Element {
 
     rsx! {
             section { class: "taskcard",
+                draggable: "true",
                 if edittitle() {
                     input { onmounted: move |e| async move { _ = e.set_focus(true).await },
                             oninput: move |e| title.set(e.value()),

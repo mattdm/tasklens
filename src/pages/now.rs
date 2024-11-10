@@ -6,8 +6,10 @@ use crate::cards::*;
 #[component]
 pub fn Now() -> Element {
     rsx! {
-        TaskCard {}
-        TaskCard {}
-        TaskCard {}
+        article { class: "taskcolumn",
+            TaskCard {}
+            TaskCard {}
+            TaskCard {}
+        }
     }
 }

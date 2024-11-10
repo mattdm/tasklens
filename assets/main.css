@@ -47,14 +47,7 @@ div.pageholder {
 }
 
 div.page {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-content: flex-start;
-    padding: 1rem;
-    gap: 1rem;
-    flex-shrink: 0;
-    flex-grow: 1;
+    display: block;
     overflow: scroll;
 }
 
@@ -111,6 +104,7 @@ div.page {
     background-clip: padding-box;
     border-radius: 5px;
     font-size: large;
+    font-family: "Aleo";
     margin: 0.15rem 0.15rem;
     padding: 0.3rem 0.5rem 0.3rem;
 }
@@ -121,28 +115,53 @@ div.page {
     font-weight: bold;
 }
 
+.taskcolumn {
+    display: flex;
+    width: fit-content;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    margin: auto;
+    padding: 1rem;
+    gap: 1rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
 .taskcard {
     width: 25rem;
     height: auto;
-    margin: 0 0;
+    margin: 0;
     padding: 0 0.5rem;
     border-radius: 20px;
     border: 0.1rem solid #333333;
     box-shadow: 0.25rem 0.5rem 0.5rem #666666;
 }
 
-.taskcard h1 input {
+@media (max-width: 30rem) {
+    .taskcard {
+        width: 80vw;
+    }
+}
+
+.taskcard h1 {
     padding: 0.1rem;
     margin: 0.5rem 0.4rem 0;
     font-size: large;
-
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: clip;
 }
 
-.taskcard p textarea {
+.taskcard p {
     padding: 0.1rem;
     margin: 0.4rem;
-
-
+    text-wrap: wrap;
+    text-overflow: ellipsis;
+    overflow: auto;
+    max-height: 20ex;
+    line-height: 2ex;
 }
 
 [contenteditable] {
