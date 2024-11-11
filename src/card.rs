@@ -20,8 +20,7 @@ pub fn TaskCard(task_id: i32) -> Element {
     rsx! {
         section { ondoubleclick: move |_| editing.set(true),
             class: "taskcard",
-            draggable: "true",
-
+            draggable: if !editing() { "true" },
             h1 { ondoubleclick: move |_| editing.set(true),
                 "{title}"
             },
