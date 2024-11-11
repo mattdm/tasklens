@@ -43,6 +43,7 @@ Future
 - [ ] review workflow
 - [ ] authentication
 - [ ] archive search
+- [ ] cards retain history / undo function
 
 ### Eventually
 
