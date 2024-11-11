@@ -10,7 +10,9 @@ pub struct TaskId {
 pub struct Task {
     pub task_id: i32,
     pub title: String,
-    pub details: String,
+    pub detail: String,
+    pub title_html: String,
+    pub detail_html: String,
     // TODO: urgency, importance, size, enjoyability, due date, computed priority
 }
 
@@ -20,6 +22,8 @@ pub fn load(id: i32) -> Task {
     Task {
         task_id: id,
         title: format!("Task #{id}"),
-        details: "_Details_".to_string(),
+        detail: "Details, _details_".to_string(),
+        title_html: format!("Task #{id}"),
+        detail_html: "<p>Details, <em>details</em></p\n".to_string(),
     }
 }

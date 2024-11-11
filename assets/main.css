@@ -7,6 +7,7 @@
 @font-face {
     font-family: "Aleo";
     font-style: italic;
+    font-weight: 100;
     src: url("./fonts/AleoVariableItalicGX.ttf");
 }
 
@@ -193,24 +194,38 @@ div.page {
     }
 }
 
-.taskcard h1 {
+h1.tasktitle {
     padding: 0.1rem;
-    margin: 0.5rem 0.4rem 0;
+    margin: 0.5rem 0 0 0;
     font-size: large;
     text-wrap: nowrap;
     text-overflow: ellipsis;
     overflow: clip;
 }
 
-.taskcard p {
+h1.tasktitle p {
+    padding: 0;
+    margin: 0;
+    font-size: large;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: clip;
+}
+
+p.taskdetail {
     padding: 0.1rem;
-    margin: 0.4rem;
+    margin: 0;
     text-wrap: wrap;
     text-overflow: ellipsis;
     overflow: auto;
     max-height: 20ex;
     line-height: 2ex;
 }
+
+/* p.tasktitle p {
+    padding: 0;
+    margin: 0;
+} */
 
 .taskcard textarea {
     width: 100%;

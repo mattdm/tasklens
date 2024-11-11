@@ -14,6 +14,9 @@ dioxus-logger = "0.5.0"
 manganis = "0.2.2"
 tracing = "0.1.40"
 convert_case = "0.6.0"
+comrak = { version = "0.29.0", default-features = false, features = [
+    "syntect",
+] }
 
 [features]
 default = []
