@@ -2,7 +2,6 @@
 use dioxus::prelude::*;
 
 use comrak::markdown_to_html;
-use tracing::warn;
 
 use crate::task;
 
@@ -10,7 +9,8 @@ use crate::task;
 pub fn TaskCard(task_id: i32) -> Element {
     // TODO: convert to  `let mut title = use_signal(|| task::load(task_id));
 
-    let mut task = task::load(task_id);
+    //let mut task = task::load(task_id);
+    let task = task::load(task_id);
 
     let mut title_raw = use_signal(|| task.title);
     let mut detail_raw = use_signal(|| task.detail);
