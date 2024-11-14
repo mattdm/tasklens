@@ -23,7 +23,7 @@ pub fn load(id: i32) -> Task {
         task_id: id,
         title: format!("Task #{id}"),
         detail: "Details, _details_".to_string(),
-        title_html: format!("Task #{id}"),
-        detail_html: "<p>Details, <em>details</em></p>\n".to_string(),
+        title_html: String::new(),
+        detail_html: String::new(),
     }
 }

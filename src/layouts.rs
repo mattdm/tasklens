@@ -5,14 +5,33 @@ use dioxus::prelude::*;
 
 #[component]
 pub fn Main() -> Element {
+    asset!("/assets/fonts/AleoVariableGX.ttf");
+    asset!("/assets/fonts/AleoVariableItalicGX.ttf");
+
     rsx! {
+
+
+        link {
+            rel: "stylesheet",
+            href: asset!("/assets/main.css")
+        }
+
+        link {
+            rel: "icon",
+            "type": "image/png",
+            href: asset!("/assets/favicon.png")
+        }
+
+
         Header {}
+
         div { class: "pageholder",
             div {
                 class: "page",
                 Outlet::<Route> {}
             }
         }
+
         Footer {}
 
     }

@@ -16,7 +16,7 @@ asset_dir = "assets"
 [web.app]
 
 # HTML title tag content
-title = "tasklens"
+title = "Tasklens"
 
 [web.watcher]
 
@@ -30,7 +30,7 @@ watch_path = ["src", "assets"]
 [web.resource]
 
 # CSS style file
-style = ["main.css"]
+style = ["/main.css"]
 
 # Javascript code file
 script = []

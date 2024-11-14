@@ -38,28 +38,28 @@ pub fn TaskCard(task_id: i32) -> Element {
                 String::new(),
             ),
         };
-
-        // TODO Only do this when there's an actual change
-
-        // TODO make this saved and configurable
-        let mut markdown_options = comrak::Options::default();
-        markdown_options.parse.smart = true;
-        markdown_options.parse.relaxed_tasklist_matching = true;
-        markdown_options.parse.relaxed_autolinks = true;
-        markdown_options.render.escape = true;
-        markdown_options.render.list_style = comrak::ListStyleType::Star;
-        markdown_options.render.escaped_char_spans = true;
-        markdown_options.extension.strikethrough = true;
-        markdown_options.extension.autolink = true;
-        markdown_options.extension.tasklist = true;
-        markdown_options.extension.footnotes = true;
-        markdown_options.extension.spoiler = true;
-
-        title_cooked.set(markdown_to_html(&new_title, &markdown_options));
-        detail_cooked.set(markdown_to_html(&new_detail, &markdown_options));
         title_raw.set(new_title);
         detail_raw.set(new_detail);
     };
+
+    // TODO make this saved and configurable
+
+    let mut markdown_options = comrak::Options::default();
+    markdown_options.parse.smart = true;
+    markdown_options.parse.relaxed_tasklist_matching = true;
+    markdown_options.parse.relaxed_autolinks = true;
+    markdown_options.render.escape = true;
+    markdown_options.render.list_style = comrak::ListStyleType::Star;
+    markdown_options.render.escaped_char_spans = true;
+    markdown_options.extension.strikethrough = true;
+    markdown_options.extension.autolink = true;
+    markdown_options.extension.tasklist = true;
+    markdown_options.extension.footnotes = true;
+    markdown_options.extension.spoiler = true;
+
+    // magic! this gets called one and then again when the captured signals get changed.
+    title_cooked.set(use_memo(move || title_raw()).to_string());
+    detail_cooked.set(use_memo(move || detail_raw()).to_string());
 
     let mut check_finished = move |k: Event<KeyboardData>| {
         match (k.key(), {
@@ -87,7 +87,7 @@ pub fn TaskCard(task_id: i32) -> Element {
                     oninput: move |e: FormEvent| { update_text(e.value()) },
                     onblur: move |_| editing.set(false),
                     rows: 20,
-                    "# {title_raw}\n\n{detail_raw}"
+                    "# {title_raw}\n\n{detail_raw}\n"
                 }
             },
 

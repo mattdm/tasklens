@@ -1,6 +1,7 @@
 @font-face {
     font-family: "Aleo";
     font-style: normal;
+    font-weight: 100;
     src: url("./fonts/AleoVariableGX.ttf");
 }
 
@@ -138,6 +139,7 @@ div.page {
     width: var(--select-button);
     font-family: "Aleo";
     font-size: large;
+    font-weight: 200;
     text-wrap: nowrap;
     overflow: clip;
     background-clip: padding-box;

@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
-
+use dioxus_logger::tracing;
 
 mod task;
 
@@ -29,7 +29,7 @@ fn App() -> Element {
 
 #[server(PostServerData)]
 async fn post_server_data(data: String) -> Result<(), ServerFnError> {
-//    info!("Server received: {}", data);
+    //    info!("Server received: {}", data);
     Ok(())
 }
 
