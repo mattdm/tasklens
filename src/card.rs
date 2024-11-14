@@ -58,8 +58,14 @@ pub fn TaskCard(task_id: i32) -> Element {
     markdown_options.extension.spoiler = true;
 
     // magic! this gets called one and then again when the captured signals get changed.
-    title_cooked.set(use_memo(move || title_raw()).to_string());
-    detail_cooked.set(use_memo(move || detail_raw()).to_string());
+    title_cooked.set(markdown_to_html(
+        &use_memo(move || title_raw()).to_string(),
+        &markdown_options,
+    ));
+    detail_cooked.set(markdown_to_html(
+        &use_memo(move || detail_raw()).to_string(),
+        &markdown_options,
+    ));
 
     let mut check_finished = move |k: Event<KeyboardData>| {
         match (k.key(), {
