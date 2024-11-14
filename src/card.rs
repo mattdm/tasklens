@@ -97,7 +97,7 @@ pub fn TaskCard(task_id: i32) -> Element {
                 }
             },
 
-            p { ondoubleclick: move |_| editing.set(true),
+            span { ondoubleclick: move |_| editing.set(true),
                 class: "taskdetail",
                 dangerous_inner_html: "{detail_cooked}" // this is fine because comrak does html sanitization
             }

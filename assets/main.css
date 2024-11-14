@@ -181,6 +181,8 @@ div.page {
 }
 
 .taskcard {
+    display: flex;
+    flex-direction: column;
     width: 25rem;
     height: auto;
     margin: 0;
@@ -214,7 +216,7 @@ h1.tasktitle p {
     overflow: clip;
 }
 
-p.taskdetail {
+span.taskdetail {
     padding: 0.1rem;
     margin: 0;
     text-wrap: wrap;
