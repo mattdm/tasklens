@@ -6,16 +6,23 @@ use comrak::markdown_to_html;
 use crate::task;
 
 #[component]
-pub fn TaskCard(task_id: i32) -> Element {
+pub fn TaskCard(task_id: i64) -> Element {
     // TODO: convert to  `let mut title = use_signal(|| task::load(task_id));
 
     //let mut task = task::load(task_id);
-    let task = task::load(task_id);
+    let task_future = use_resource(move || task::load(task_id));
 
-    let mut title_raw = use_signal(|| task.title);
-    let mut detail_raw = use_signal(|| task.detail);
-    let mut title_cooked = use_signal(|| task.title_html);
-    let mut detail_cooked = use_signal(|| task.detail_html);
+    let task_ref = task_future.read_unchecked();
+    let task_data = match &*task_ref {
+        Some(Ok(t)) => t,
+        Some(Err(_e)) => todo!(),
+        None => &task::Task::default(),
+    };
+
+    let mut title_raw = use_signal(|| task_data.title.clone());
+    let mut detail_raw = use_signal(|| task_data.detail.clone());
+    let mut title_cooked = use_signal(|| task_data.title_html.clone());
+    let mut detail_cooked = use_signal(|| task_data.detail_html.clone());
 
     let mut editing = use_signal(|| false);
 

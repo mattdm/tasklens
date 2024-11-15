@@ -25,14 +25,3 @@ fn App() -> Element {
         Router::<Route> {}
     }
 }
-
-#[server(PostServerData)]
-async fn post_server_data(data: String) -> Result<(), ServerFnError> {
-    //    info!("Server received: {}", data);
-    Ok(())
-}
-
-#[server(GetServerData)]
-async fn get_server_data() -> Result<String, ServerFnError> {
-    Ok("Hello from a badge!".to_string())
-}
