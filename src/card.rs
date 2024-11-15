@@ -21,6 +21,7 @@ pub fn TaskCard(task_id: i32) -> Element {
 
     // splits into title (first line without any leading #) and body (the rest without leading whitespace)
     let mut update_text = move |raw_text: String| {
+        // TODO: don't run more than once in five seconds!
         let (new_title, new_detail) = match raw_text.split_once('\n') {
             Some((first_line, rest)) => (
                 first_line
@@ -43,7 +44,6 @@ pub fn TaskCard(task_id: i32) -> Element {
     };
 
     // TODO make this saved and configurable
-
     let mut markdown_options = comrak::Options::default();
     markdown_options.parse.smart = true;
     markdown_options.parse.relaxed_tasklist_matching = true;
@@ -58,6 +58,8 @@ pub fn TaskCard(task_id: i32) -> Element {
     markdown_options.extension.spoiler = true;
 
     // magic! this gets called one and then again when the captured signals get changed.
+    // BUG -- dioxus is warning about writing to signals during a render. I think it _might_
+    // be okay but need to check.
     title_cooked.set(markdown_to_html(
         &use_memo(move || title_raw()).to_string(),
         &markdown_options,
