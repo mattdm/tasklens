@@ -33,6 +33,7 @@ footer {
     flex: none none auto;
     background-color: var(--color-accent);
     flex-shrink: 1;
+    overflow: hidden;
 }
 
 #main {
@@ -58,7 +59,10 @@ div.page {
     width: var(--ui-square);
     height: var(--ui-square);
     flex: none none auto;
+    font-size: xx-large;
+    z-index: 10;
 }
+
 
 .contextcontainer {
     height: var(--ui-square);
@@ -99,6 +103,7 @@ div.page {
     height: var(--ui-square);
     justify-content: center;
     flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 #ideasbutton.pageselector {

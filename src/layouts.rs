@@ -11,11 +11,13 @@ pub fn Main() -> Element {
     rsx! {
 
 
+        // FIXME: head::Link {
         link {
             rel: "stylesheet",
             href: asset!("/assets/main.css")
         }
 
+        // FIXME: head::Link {
         link {
             rel: "icon",
             "type": "image/png",

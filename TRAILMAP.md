@@ -8,17 +8,19 @@ Fundamentals
 
 Like, really basic, because there's not even an app here yet.
 
-- [ ] basic "now" view
-- [ ] basic card component
+- [x] basic "now" view
+- [x] basic card component
 - [ ] ui for adding tasks
-- [ ] server-side storage (turbosql?)
+- [x] server-side storage (turbosql?)
+- [ ] add a priority field, and update by drag-and-drop
+- [ ] update now view to actually read the top 3 by priority
+- [ ] manually 
+- [ ] this week / today (with "now" line on today)
+- [ ] backlog / ready (with "this week" line on backlog)
 - [ ] archive
 - [ ] trash
-- [ ] backlog ("primordial soup")
-- [ ] up next / this week
-- [ ] manually populate this week from up next
 - [ ] manually populate today from this week
-- [ ] "defer" button (initially, kicks card back)
+- [ ] "defer" button (lowers urgency -- or initially, priority)
 - [ ] conceptual choice: pass around card ids or whole card structs?
 
 Future
@@ -34,16 +36,17 @@ Future
 - [ ] size (minutes, hour, few hours, a day, too big)
 - [ ] pause and defer all "today" items at end of day
 - [ ] clear this week (back to ready) on configured day of week
+- [ ] cache the 
 
 ### Next
 
-- [ ] auto-fill today and this week
 - [ ] automatic reports (this week, arbitrary timeframe)
 - [ ] clone / split cards
 - [ ] review workflow
 - [ ] authentication
 - [ ] archive search
 - [ ] cards retain history / undo function
+- [ ] Extra-details (normally hidden) section for card.
 
 ### Eventually
 

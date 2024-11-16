@@ -2777,6 +2777,7 @@ dependencies = [
  "dioxus",
  "dioxus-logger",
  "serde",
+ "time",
  "tracing-subscriber",
  "tracing-wasm",
  "turbosql",

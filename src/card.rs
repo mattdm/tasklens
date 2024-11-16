@@ -10,19 +10,19 @@ pub fn TaskCard(task_id: i64) -> Element {
     // TODO: convert to  `let mut title = use_signal(|| task::load(task_id));
 
     //let mut task = task::load(task_id);
-    let task_future = use_resource(move || task::load(task_id));
-
+    let task_future = use_server_future(move || task::read(task_id))?;
     let task_ref = task_future.read_unchecked();
     let task_data = match &*task_ref {
         Some(Ok(t)) => t,
-        Some(Err(_e)) => todo!(),
-        None => &task::Task::default(),
+        Some(Err(_e)) => &task::TaskTable::default(), // FIXME: handle error
+        None => unreachable!("This shouldn't happen."),
     };
+
+    //assert!(task_id == task_data.rowid.unwrap());
 
     let mut title_raw = use_signal(|| task_data.title.clone());
     let mut detail_raw = use_signal(|| task_data.detail.clone());
-    let mut title_cooked = use_signal(|| task_data.title_html.clone());
-    let mut detail_cooked = use_signal(|| task_data.detail_html.clone());
+    let mut html = use_signal(|| task_data.html.clone());
 
     let mut editing = use_signal(|| false);
 
@@ -50,24 +50,12 @@ pub fn TaskCard(task_id: i64) -> Element {
         detail_raw.set(new_detail);
     };
 
-    // TODO make this saved and configurable
-    let mut markdown_options = comrak::Options::default();
-    markdown_options.parse.smart = true;
-    markdown_options.parse.relaxed_tasklist_matching = true;
-    markdown_options.parse.relaxed_autolinks = true;
-    markdown_options.render.escape = true;
-    markdown_options.render.list_style = comrak::ListStyleType::Star;
-    markdown_options.render.escaped_char_spans = true;
-    markdown_options.extension.strikethrough = true;
-    markdown_options.extension.autolink = true;
-    markdown_options.extension.tasklist = true;
-    markdown_options.extension.footnotes = true;
-    markdown_options.extension.spoiler = true;
-
     // magic! this gets called one and then again when the captured signals get changed.
     // BUG -- dioxus is warning about writing to signals during a render. I think it _might_
     // be okay but need to check.
-    title_cooked.set(markdown_to_html(
+    // TODO -- also, we shouldn't run this on every card load. that's the point of storing
+    // "cooked" values in the db.
+    cooked.set(markdown_to_html(
         &use_memo(move || title_raw()).to_string(),
         &markdown_options,
     ));
@@ -100,7 +88,9 @@ pub fn TaskCard(task_id: i64) -> Element {
                     onmounted: move |e: MountedEvent | async move { _ = e.set_focus(true).await },
                     onkeyup: move |e: KeyboardEvent| { check_finished(e)},
                     oninput: move |e: FormEvent| { update_text(e.value()) },
-                    onblur: move |_| editing.set(false),
+                    onblur: move |_| async move { editing.set(false);
+                            task::update( task_id, title_raw(), detail_raw(), title_cooked(), detail_cooked()).await.unwrap();
+                        },
                     rows: 20,
                     "# {title_raw}\n\n{detail_raw}\n"
                 }
