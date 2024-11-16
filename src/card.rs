@@ -1,8 +1,6 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
 
-use comrak::markdown_to_html;
-
 use crate::task;
 
 #[component]
@@ -10,59 +8,51 @@ pub fn TaskCard(task_id: i64) -> Element {
     // TODO: convert to  `let mut title = use_signal(|| task::load(task_id));
 
     //let mut task = task::load(task_id);
-    let task_future = use_server_future(move || task::read(task_id))?;
-    let task_ref = task_future.read_unchecked();
-    let task_data = match &*task_ref {
-        Some(Ok(t)) => t,
-        Some(Err(_e)) => &task::TaskTable::default(), // FIXME: handle error
-        None => unreachable!("This shouldn't happen."),
-    };
+    // let task_future = use_server_future(move || task::read(task_id))?;
+    // let task_ref = task_future.read_unchecked();
+    // let task_data = match &*task_ref {
+    //     Some(Ok(t)) => t,
+    //     Some(Err(_e)) => &task::TaskInfo::default(), // FIXME: handle error
+    //     None => unreachable!("This shouldn't happen."),
+    // };
 
-    //assert!(task_id == task_data.rowid.unwrap());
+    //let result = use_server_future(|| task::load(task_id));
+    let result = use_server_future(|| task::read(task_id))?;
+    let foo = result.value();
+    // let whygodwhy = result.read_unchecked();
+    // let task_data = match &*whygodwhy {
+    //     Some(Ok(t)) => task::TaskInfo {
+    //         task_id: t.task_id,
+    //         raw: t.raw,
+    //         html: t.html,
+    //     },
+    //     Some(Err(e)) => task::TaskInfo {
+    //         task_id: 0,
+    //         raw: format!("Error: {e:}"),
+    //         html: format!("<h1>Error</h1>\n\n<code>{e:?}</code>\n"),
+    //     },
+    //     None => task::TaskInfo {
+    //         task_id: 0,
+    //         raw: format!("Loading"),
+    //         html: format!("<h1>Loading...</h1>\n\nPlease wait.\n"),
+    //     },
+    // };
 
-    let mut title_raw = use_signal(|| task_data.title.clone());
-    let mut detail_raw = use_signal(|| task_data.detail.clone());
+    let mut raw = use_signal(|| task_data.raw.clone());
     let mut html = use_signal(|| task_data.html.clone());
 
     let mut editing = use_signal(|| false);
 
-    // splits into title (first line without any leading #) and body (the rest without leading whitespace)
+    // cook the text (and later, save it here?)
+    // TODO: don't cook more than every second, don't save more than once every 5
     let mut update_text = move |raw_text: String| {
         // TODO: don't run more than once in five seconds!
-        let (new_title, new_detail) = match raw_text.split_once('\n') {
-            Some((first_line, rest)) => (
-                first_line
-                    .trim_start_matches(|c: char| c == '#' || c.is_whitespace())
-                    .trim_end()
-                    .to_string(),
-                rest.trim_start().to_string(),
-            ),
-            // If there's no newline, the entire input is the title
-            None => (
-                raw_text
-                    .trim_start_matches(|c: char| c == '#' || c.is_whitespace())
-                    .trim_end()
-                    .to_string(),
-                String::new(),
-            ),
+        match use_server_future(|| task::cook(raw)).value() {
+            Some(Ok(t)) => html.set(t.html),
+            Some(Err(e)) => html.set(format!("<h1>Error</h1>\n\n<code>{e:?}</code>\n")),
+            None => {}
         };
-        title_raw.set(new_title);
-        detail_raw.set(new_detail);
     };
-
-    // magic! this gets called one and then again when the captured signals get changed.
-    // BUG -- dioxus is warning about writing to signals during a render. I think it _might_
-    // be okay but need to check.
-    // TODO -- also, we shouldn't run this on every card load. that's the point of storing
-    // "cooked" values in the db.
-    cooked.set(markdown_to_html(
-        &use_memo(move || title_raw()).to_string(),
-        &markdown_options,
-    ));
-    detail_cooked.set(markdown_to_html(
-        &use_memo(move || detail_raw()).to_string(),
-        &markdown_options,
-    ));
 
     let mut check_finished = move |k: Event<KeyboardData>| {
         match (k.key(), {
